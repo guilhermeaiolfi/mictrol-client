@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Plenário</title>
+    <style>
+    .led {
+      display:  inline;
+      padding:  8px;
+      cursor:  pointer;
+      position:  absolute;
+      border-radius:  50%;
+      width:  50px;
+      height:  50px;
+      line-height: 50px;
+      text-align: center;
+      font-size:  130%;
+    }
+    .muted {
+      background-color: #00436E;
+      color: white;
+    }
+    .unmuted {
+      background-color: red;
+      color: white;
+      animation-name: color;
+      animation-duration: 1s;
+      animation-iteration-count: infinite;
+      animation-direction: alternate;
+    }
+
+    @keyframes color {
+      0% {
+        background-color: red;
+      }
+      50% {
+        background-color: #FF7F7F;
+      }
+      100% {
+        background-color: red;
+      }
+    }
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+  </head>
+  <body>
+    <div id="app">
+
+      <div class="container">
+        <div v-for="(channel, index) in channels" :class="{ led: true, muted: channel.state == 0, unmuted: channel.state == 1 }" :style="{ left: channel.left + 'px', top: channel.top +'px'}" @click="toggleChannel(index)">{{index + 1}}</div>
+      </div>
+    </div>
+
+    <script src="https://cdn.socket.io/3.1.3/socket.io.min.js"></script>
+    <script src="main.js"></script>
+  </body>
+</html>
